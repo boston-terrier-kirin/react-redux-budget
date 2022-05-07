@@ -7,14 +7,8 @@
       "id": "10a5e8ea-127c-407e-b956-3fe382c4c9c3"
     },
     {
-      "description": "Dog Food",
-      "value": "23",
-      "isExpense": true,
-      "id": "351e2b2a-6ab3-4539-a4db-ef66e5557c00"
-    },
-    {
       "description": "Cabinet",
-      "value": "80",
+      "value": "167",
       "isExpense": true,
       "id": "b9c9fafc-5ea6-438d-b5ca-e3cc5bd41c6f"
     }
