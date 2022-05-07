@@ -26,17 +26,31 @@ function App() {
     setEntries(updatedEntries);
   };
 
+  const editEntry = (entryToUpdate) => {
+    const updatedEntries = entries.map((entry) => {
+      if (entry.id === entryToUpdate.id) {
+        return { ...entry, ...entryToUpdate };
+      }
+      return entry;
+    });
+    setEntries(updatedEntries);
+  };
+
   return (
     <Container>
       <MainHeader title="Budget" />
       <DisplayBalance title="Your Balance" value="2,550.53" size="small" />
       <DisplayBalances />
 
-      <MainHeader type="h3" title="History" />
-      <EntryLines entries={entries} onDeleteEntry={deleteEntry} />
-
       <MainHeader type="h3" title="Add New Transaction" />
       <NewEntryForm onAddEntry={addEntry} />
+
+      <MainHeader type="h3" title="History" />
+      <EntryLines
+        entries={entries}
+        onEditEntry={editEntry}
+        onDeleteEntry={deleteEntry}
+      />
     </Container>
   );
 }

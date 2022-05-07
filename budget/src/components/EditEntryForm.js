@@ -1,32 +1,14 @@
 import { useState } from 'react';
-import { Checkbox, Form, Segment } from 'semantic-ui-react';
-import ButtonSaveOrCancel from './ButtonSaveOrCancel';
+import { Button, Checkbox, Form, Segment } from 'semantic-ui-react';
 
-const NewEntryForm = ({ onAddEntry }) => {
-  const [description, setDescription] = useState('');
-  const [value, setValue] = useState('');
-  const [isExpense, setIsExpense] = useState(false);
+const EditEntryForm = ({ entry, onEditEntry }) => {
+  const [description, setDescription] = useState(entry.description);
+  const [value, setValue] = useState(entry.value);
+  const [isExpense, setIsExpense] = useState(entry.isExpense);
 
   const onFormSubmit = (event) => {
     event.preventDefault();
-    onAddEntry({ id: 999, description, value, isExpense });
-    resetForm();
-  };
-
-  /**
-   * ★ハマリどころ★
-   * ButtonSaveOrCancelのCancelをtype=submitのままににしておくと、Enterキーで一番最初のsubmitがCancelになってしまうので、
-   * Cancelが呼び出されてしまう。
-   */
-  const onCancel = (event) => {
-    event.preventDefault();
-    resetForm();
-  };
-
-  const resetForm = () => {
-    setDescription('');
-    setValue('');
-    setIsExpense(false);
+    onEditEntry({ id: entry.id, description, value, isExpense });
   };
 
   return (
@@ -58,9 +40,11 @@ const NewEntryForm = ({ onAddEntry }) => {
           onChange={() => setIsExpense((current) => !current)}
         />
       </Segment>
-      <ButtonSaveOrCancel onCancel={onCancel} onOk={onFormSubmit} />
+      <Button primary onClick={onFormSubmit}>
+        OK
+      </Button>
     </Form>
   );
 };
 
-export default NewEntryForm;
+export default EditEntryForm;
