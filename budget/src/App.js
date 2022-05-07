@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { Container } from 'semantic-ui-react';
 import DisplayBalance from './components/DisplayBalance';
 import DisplayBalances from './components/DisplayBalances';
+import EditEntryForm from './components/EditEntryForm';
 import EntryLines from './components/EntryLines';
 import MainHeader from './components/MainHeader';
+import ModalEdit from './components/ModalEdit';
 import NewEntryForm from './components/NewEntryForm';
 
 const initialState = [
@@ -14,7 +16,9 @@ const initialState = [
 ];
 
 function App() {
+  const [entry, setEntry] = useState({});
   const [entries, setEntries] = useState(initialState);
+  const [isOpen, setIsOpen] = useState(false);
 
   const deleteEntry = (id) => {
     const updatedEntries = entries.filter((entry) => entry.id !== id);
@@ -22,18 +26,26 @@ function App() {
   };
 
   const addEntry = (entry) => {
-    const updatedEntries = [...entries, entry];
+    const updatedEntries = [...entries, { ...entry, id: entries.length + 1 }];
     setEntries(updatedEntries);
   };
 
-  const editEntry = (entryToUpdate) => {
-    const updatedEntries = entries.map((entry) => {
-      if (entry.id === entryToUpdate.id) {
-        return { ...entry, ...entryToUpdate };
-      }
-      return entry;
-    });
+  const editEntry = (id) => {
+    const entryToUpdate = entries.find((entry) => entry.id === id);
+    setEntry(entryToUpdate);
+    setIsOpen(true);
+  };
+
+  const editEntryAndCloseModal = (entryToUpdate) => {
+    const updatedEntries = entries.map((entry) =>
+      entry.id === entryToUpdate.id ? { ...entry, ...entryToUpdate } : entry
+    );
     setEntries(updatedEntries);
+    setIsOpen(false);
+  };
+
+  const onClose = () => {
+    setIsOpen(false);
   };
 
   return (
@@ -51,6 +63,10 @@ function App() {
         onEditEntry={editEntry}
         onDeleteEntry={deleteEntry}
       />
+
+      <ModalEdit isOpen={isOpen} onClose={onClose}>
+        <EditEntryForm entry={entry} onEditEntry={editEntryAndCloseModal} />
+      </ModalEdit>
     </Container>
   );
 }

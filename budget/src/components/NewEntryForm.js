@@ -9,7 +9,7 @@ const NewEntryForm = ({ onAddEntry }) => {
 
   const onFormSubmit = (event) => {
     event.preventDefault();
-    onAddEntry({ id: 999, description, value, isExpense });
+    onAddEntry({ description, value, isExpense });
     resetForm();
   };
 

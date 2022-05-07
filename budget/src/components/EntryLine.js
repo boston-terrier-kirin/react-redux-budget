@@ -1,20 +1,7 @@
-import { useState } from 'react';
 import { Grid, Icon, Segment } from 'semantic-ui-react';
-import EditEntryForm from './EditEntryForm';
-import ModalEdit from './ModalEdit';
 
 const EntryLine = ({ entry, onEditEntry, onDeleteEntry }) => {
   const { id, description, value, isExpense = false } = entry;
-  const [isOpen, setIsOpen] = useState(false);
-
-  const onClose = () => {
-    setIsOpen(false);
-  };
-
-  const onEditEntryAndCloseModal = (entry) => {
-    setIsOpen(false);
-    onEditEntry(entry);
-  };
 
   return (
     <>
@@ -26,15 +13,12 @@ const EntryLine = ({ entry, onEditEntry, onDeleteEntry }) => {
             </Grid.Column>
             <Grid.Column width="3">{value}</Grid.Column>
             <Grid.Column width="3">
-              <Icon name="edit" onClick={() => setIsOpen(true)} />
+              <Icon name="edit" onClick={() => onEditEntry(id)} />
               <Icon name="trash" onClick={() => onDeleteEntry(id)} />
             </Grid.Column>
           </Grid.Row>
         </Grid>
       </Segment>
-      <ModalEdit isOpen={isOpen} onClose={onClose}>
-        <EditEntryForm entry={entry} onEditEntry={onEditEntryAndCloseModal} />
-      </ModalEdit>
     </>
   );
 };
