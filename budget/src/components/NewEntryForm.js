@@ -9,12 +9,17 @@ const NewEntryForm = ({ onAddEntry }) => {
 
   const onFormSubmit = (event) => {
     event.preventDefault();
-
     onAddEntry({ description, value, id: 999, isExpense: isExpense });
     resetForm();
   };
 
-  const onCancel = () => {
+  /**
+   * ★ハマリどころ★
+   * ButtonSaveOrCancelのCancelをtype=submitのままににしておくと、Enterキーで一番最初のsubmitがCancelになってしまうので、
+   * Cancelが呼び出されてしまう。
+   */
+  const onCancel = (event) => {
+    event.preventDefault();
     resetForm();
   };
 
@@ -42,7 +47,7 @@ const NewEntryForm = ({ onAddEntry }) => {
           label="Value"
           placeholder="100.00"
           value={value}
-          onChange={(event) => setValue(event.target.checked)}
+          onChange={(event) => setValue(event.target.value)}
         ></Form.Input>
       </Form.Group>
       <Segment compact>
@@ -53,7 +58,7 @@ const NewEntryForm = ({ onAddEntry }) => {
           onChange={() => setIsExpense((current) => !current)}
         />
       </Segment>
-      <ButtonSaveOrCancel onCancel={onCancel} />
+      <ButtonSaveOrCancel onCancel={onCancel} onOk={onFormSubmit} />
     </Form>
   );
 };
