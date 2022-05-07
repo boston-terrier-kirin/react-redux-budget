@@ -1,27 +1,30 @@
 import { useEffect, useState } from 'react';
 import { Container } from 'semantic-ui-react';
+import { v4 as uuidv4 } from 'uuid';
+import { budgets } from './apis/budgets';
+import MainHeader from './components/MainHeader';
 import DisplayBalance from './components/DisplayBalance';
 import DisplayBalances from './components/DisplayBalances';
-import EditEntryForm from './components/EditEntryForm';
-import EntryLines from './components/EntryLines';
-import MainHeader from './components/MainHeader';
-import ModalEdit from './components/ModalEdit';
 import NewEntryForm from './components/NewEntryForm';
-
-const initialState = [
-  { id: 1, description: 'Work Income', value: 2000.0, isExpense: false },
-  { id: 2, description: 'Water Bill', value: 10.0, isExpense: true },
-  { id: 3, description: 'House Rent', value: 200.0, isExpense: true },
-  { id: 4, description: 'Power Bill', value: 100.0, isExpense: true },
-];
+import EntryLines from './components/EntryLines';
+import EditEntryForm from './components/EditEntryForm';
+import ModalEdit from './components/ModalEdit';
 
 function App() {
   const [entry, setEntry] = useState({});
-  const [entries, setEntries] = useState(initialState);
+  const [entries, setEntries] = useState([]);
   const [income, setIncome] = useState(0);
   const [expense, setExpense] = useState(0);
   const [balance, setBalance] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const fetchBudgets = async () => {
+      const res = await budgets.get('/budgets');
+      setEntries(res.data);
+    };
+    fetchBudgets();
+  }, [entry]);
 
   useEffect(() => {
     const { calcIncome, calcExpense } = entries.reduce(
@@ -42,14 +45,11 @@ function App() {
     setBalance(calcIncome - calcExpense);
   }, [entries]);
 
-  const deleteEntry = (id) => {
-    const updatedEntries = entries.filter((entry) => entry.id !== id);
-    setEntries(updatedEntries);
-  };
+  const addEntry = async (entry) => {
+    const entryToUpdate = { ...entry, id: uuidv4() };
+    await budgets.post('/budgets', entryToUpdate);
 
-  const addEntry = (entry) => {
-    const updatedEntries = [...entries, { ...entry, id: entries.length + 1 }];
-    setEntries(updatedEntries);
+    setEntry(entryToUpdate);
   };
 
   const editEntry = (id) => {
@@ -58,16 +58,20 @@ function App() {
     setIsOpen(true);
   };
 
-  const editEntryAndCloseModal = (entryToUpdate) => {
-    const updatedEntries = entries.map((entry) =>
-      entry.id === entryToUpdate.id ? { ...entry, ...entryToUpdate } : entry
-    );
-    setEntries(updatedEntries);
+  const editEntryAndCloseModal = async (entryToUpdate) => {
+    await budgets.patch(`/budgets/${entryToUpdate.id}`, entryToUpdate);
+
+    setEntry(entryToUpdate);
     setIsOpen(false);
   };
 
   const onClose = () => {
     setIsOpen(false);
+  };
+
+  const deleteEntry = async (id) => {
+    await budgets.delete(`/budgets/${id}`);
+    setEntry({});
   };
 
   return (
