@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Grid, Icon, Segment } from 'semantic-ui-react';
+import EditEntryForm from './EditEntryForm';
 import ModalEdit from './ModalEdit';
 
 const EntryLine = ({ entry, onEditEntry, onDeleteEntry }) => {
@@ -31,12 +32,9 @@ const EntryLine = ({ entry, onEditEntry, onDeleteEntry }) => {
           </Grid.Row>
         </Grid>
       </Segment>
-      <ModalEdit
-        isOpen={isOpen}
-        onClose={onClose}
-        entry={entry}
-        onEditEntry={onEditEntryAndCloseModal}
-      />
+      <ModalEdit isOpen={isOpen} onClose={onClose}>
+        <EditEntryForm entry={entry} onEditEntry={onEditEntryAndCloseModal} />
+      </ModalEdit>
     </>
   );
 };
