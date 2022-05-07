@@ -1,0 +1,6 @@
+export const BUDGET_ACTION_TYPES = {
+  SET_ENTRIES: 'budget/SET_ENTRIES',
+  ADD_ENTRY: 'budget/ADD_ENTRY',
+  EDIT_ENTRY: 'budget/EDIT_ENTRY',
+  DELETE_ENTRY: 'budget/DELETE_ENTRY',
+};
