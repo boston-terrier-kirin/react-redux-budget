@@ -1,6 +1,12 @@
 import { Grid, Icon, Segment } from 'semantic-ui-react';
 
-const EntryLine = ({ description, value, isExpense = false }) => {
+const EntryLine = ({
+  id,
+  description,
+  value,
+  isExpense = false,
+  onDeleteEntry,
+}) => {
   return (
     <Segment color={isExpense ? 'red' : 'green'}>
       <Grid columns="3" textAlign="right">
@@ -11,7 +17,7 @@ const EntryLine = ({ description, value, isExpense = false }) => {
           <Grid.Column width="3">{value}</Grid.Column>
           <Grid.Column width="3">
             <Icon name="edit" />
-            <Icon name="trash" />
+            <Icon name="trash" onClick={() => onDeleteEntry(id)} />
           </Grid.Column>
         </Grid.Row>
       </Grid>
