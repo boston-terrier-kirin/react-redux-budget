@@ -70,6 +70,8 @@ export const budgetReducer = (state = initialState, action) => {
         balance: balanceToEdit,
       } = calc(latestEntriesToEdit);
 
+      console.log('★', latestEntriesToEdit);
+
       return {
         ...state,
         entries: latestEntriesToEdit,

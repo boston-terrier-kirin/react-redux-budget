@@ -17,7 +17,7 @@ export const addEntry = (entry) => {
 
 export const editEntry = (entry) => {
   return async (dispatch) => {
-    await budgets.patch(`/budgets/${entry.id}`, { entry });
+    await budgets.patch(`/budgets/${entry.id}`, entry);
     dispatch({ type: BUDGET_ACTION_TYPES.EDIT_ENTRY, payload: entry });
   };
 };

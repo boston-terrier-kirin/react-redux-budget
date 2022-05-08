@@ -1,22 +1,10 @@
 {
   "budgets": [
     {
-      "id": "bc940615-8dc0-4658-9823-c13c5960385d",
+      "id": "d9515ef1-d3a4-4cca-8a49-5bee476b5ea5",
       "description": "4月分給料",
-      "value": "40000",
+      "value": "30001",
       "isExpense": false
-    },
-    {
-      "id": "1ac44e53-ec4f-4417-818d-3e3e3b99a460",
-      "description": "5月分給料",
-      "value": "40000",
-      "isExpense": false
-    },
-    {
-      "id": "fa947a72-84c3-4694-a916-88d7caee3386",
-      "description": "ドッグフード",
-      "value": "20",
-      "isExpense": true
     }
   ]
 }
