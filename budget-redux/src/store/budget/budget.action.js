@@ -1,10 +1,10 @@
 import { budgets } from '../../apis/budgets';
 import { BUDGET_ACTION_TYPES } from './budget.types';
 
-export const setEntries = () => {
+export const fetchEntries = () => {
   return async (dispatch) => {
     const res = await budgets.get('/budgets');
-    dispatch({ type: BUDGET_ACTION_TYPES.SET_ENTRIES, payload: res.data });
+    dispatch({ type: BUDGET_ACTION_TYPES.FETCH_ENTRIES, payload: res.data });
   };
 };
 

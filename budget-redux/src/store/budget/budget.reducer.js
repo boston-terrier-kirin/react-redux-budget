@@ -32,7 +32,7 @@ export const budgetReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case BUDGET_ACTION_TYPES.SET_ENTRIES:
+    case BUDGET_ACTION_TYPES.FETCH_ENTRIES:
       const { income, expense, balance } = calc(payload);
       return {
         ...state,

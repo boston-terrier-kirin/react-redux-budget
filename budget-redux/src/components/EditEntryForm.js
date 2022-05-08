@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, Checkbox, Form, Segment } from 'semantic-ui-react';
 import { editEntry } from '../store/budget/budget.action';
+import { editEntryEnd } from '../store/modal/modal.action';
 
 const EditEntryForm = ({ entry }) => {
   const dispatch = useDispatch();
@@ -13,7 +14,9 @@ const EditEntryForm = ({ entry }) => {
     event.preventDefault();
     const entryToUpdate = { id: entry.id, description, value, isExpense };
 
+    // TODO：ダブルディスパッチはどうなんだろうか？
     dispatch(editEntry(entryToUpdate));
+    dispatch(editEntryEnd(false, null));
   };
 
   return (

@@ -1,46 +1,22 @@
 {
   "budgets": [
     {
-      "description": "April Salary",
-      "value": "90000",
-      "isExpense": false,
-      "id": "10a5e8ea-127c-407e-b956-3fe382c4c9c3"
-    },
-    {
-      "description": "Cabinet",
-      "value": "167",
-      "isExpense": true,
-      "id": "b9c9fafc-5ea6-438d-b5ca-e3cc5bd41c6f",
-      "entry": {
-        "id": "b9c9fafc-5ea6-438d-b5ca-e3cc5bd41c6f",
-        "description": "NITORI Cabinet",
-        "value": "167",
-        "isExpense": true
-      }
-    },
-    {
-      "description": "Kirin",
-      "value": "10",
-      "isExpense": true,
-      "id": "ae89d3d1-7c6b-4ce0-909c-7317bc622d02"
-    },
-    {
-      "description": "Kuroro",
-      "value": "200",
-      "isExpense": false,
-      "id": "2230e2b0-63b3-46ac-a624-5eaa5c003c52"
-    },
-    {
-      "description": "iPhone",
-      "value": "1000",
-      "isExpense": true,
-      "id": "c57acc6b-f494-4b5a-8026-4ec2c2456892"
-    },
-    {
-      "id": "8ea1d1c0-2e60-4549-adc0-710d11f54163",
-      "description": "YouTube",
-      "value": "2",
+      "id": "bc940615-8dc0-4658-9823-c13c5960385d",
+      "description": "4月分給料",
+      "value": "40000",
       "isExpense": false
+    },
+    {
+      "id": "1ac44e53-ec4f-4417-818d-3e3e3b99a460",
+      "description": "5月分給料",
+      "value": "40000",
+      "isExpense": false
+    },
+    {
+      "id": "fa947a72-84c3-4694-a916-88d7caee3386",
+      "description": "ドッグフード",
+      "value": "20",
+      "isExpense": true
     }
   ]
 }

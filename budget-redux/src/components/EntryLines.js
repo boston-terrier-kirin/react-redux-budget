@@ -1,8 +1,8 @@
 import EntryLine from './EntryLine';
 
-const EntryLines = ({ entries, onModalOpen }) => {
+const EntryLines = ({ entries }) => {
   const entresToRender = entries.map((entry) => (
-    <EntryLine key={entry.id} entry={entry} onModalOpen={onModalOpen} />
+    <EntryLine key={entry.id} entry={entry} />
   ));
 
   return <>{entresToRender}</>;

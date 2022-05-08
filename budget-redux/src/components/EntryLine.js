@@ -1,10 +1,15 @@
 import { useDispatch } from 'react-redux';
 import { Grid, Icon, Segment } from 'semantic-ui-react';
 import { deleteEntry } from '../store/budget/budget.action';
+import { editEntryStart } from '../store/modal/modal.action';
 
-const EntryLine = ({ entry, onModalOpen }) => {
+const EntryLine = ({ entry }) => {
   const dispatch = useDispatch();
   const { id, description, value, isExpense = false } = entry;
+
+  const onModalOpen = () => {
+    dispatch(editEntryStart(true, entry));
+  };
 
   const onDeleteEntry = () => {
     dispatch(deleteEntry(id));
